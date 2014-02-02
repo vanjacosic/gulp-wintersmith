@@ -1,35 +1,39 @@
 {
-    "name": "gulp-wintersmith",
-    "version": "0.0.1",
-    "description": "Gulp plugin for the Wintersmith static site generator",
-    "license": "MIT",
-    "homepage": "https://github.com/vanjacosic/gulp-wintersmith",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/vanjacosic/gulp-wintersmith.git"
-    },
-    "bugs": {
-        "url" : "https://github.com/vanjacosic/gulp-wintersmith/issues"
-    },
-    "author": {
-        "name": "Vanja Cosic",
-        "email": "vanja@cosic.dk",
-        "url": "http://cosic.dk"
-    },
-    "keywords": [
-        "gulp",
-        "gulpplugin",
-        "wintersmith",
-        "static site",
-        "static site generator",
-        "ssg",
-        "blog"
-    ],
-    "readmeFilename": "README.md",
-    "files": [
-        "index.js"
-    ],
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    }
+  "name": "gulp-wintersmith",
+  "version": "0.0.1",
+  "description": "Gulp plugin for the Wintersmith static site generator",
+  "license": "MIT",
+  "homepage": "https://github.com/vanjacosic/gulp-wintersmith",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vanjacosic/gulp-wintersmith.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vanjacosic/gulp-wintersmith/issues"
+  },
+  "author": {
+    "name": "Vanja Cosic",
+    "email": "vanja@cosic.dk",
+    "url": "http://cosic.dk"
+  },
+  "keywords": [
+    "gulp",
+    "gulpplugin",
+    "wintersmith",
+    "static site",
+    "static site generator",
+    "ssg",
+    "blog"
+  ],
+  "readmeFilename": "README.md",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "gulp-util": "~2.2.13",
+    "map-stream": "~0.1.0"
+  }
 }
