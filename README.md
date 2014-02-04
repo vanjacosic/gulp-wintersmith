@@ -9,7 +9,7 @@ Simple plugin that lets you make a gulp task to either build or preview your sit
 Install with npm from GitHub
 
 ```
-npm install --save-dev git+https://github.com/vanjacosic/gulp-wintersmith.git
+npm install --save-dev gulp-wintersmith
 ```
 
 ## Usage
