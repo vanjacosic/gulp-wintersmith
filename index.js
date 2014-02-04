@@ -1,6 +1,7 @@
 // Requirements
-var gutil = require('gulp-util');
+var path = require('path');
 var map = require('map-stream');
+var gutil = require('gulp-util');
 var wintersmith = require('wintersmith');
 
 // Helper function
@@ -8,33 +9,34 @@ function errorMessage(message) {
     throw new gutil.PluginError('gulp-wintersmith', message);
 }
 
-function doActionBuild(env) {
-    // Build site to path
+// Build site to path
+function runWintersmithBuild(env) {
     env.build(function(error) {
         if (error) {
-            errorMessage('Error:' + error);
+            errorMessage(error);
         }
 
-        gutil.log('gulp-wintersmith', 'Done building!');
+        gutil.log('gulp-wintersmith:', 'Done building!');
     });
 }
 
-function doActionPreview(env) {
-    // Run in preview mode
+// Run in preview mode
+function runWintersmithPreview(env) {
     env.preview(function(error) {
         if (error) {
-            errorMessage('Error:' + error);
+            errorMessage(error);
         }
     });
 }
 
 // Plugin function
-module.exports = function(action) {
-    // Prepare argument
-    action = action || 'preview';
+module.exports = function(actionArg) {
 
     // Process files
     return map(function(file, callback) {
+
+        // Use provided option or use default
+        var action = actionArg || 'preview';
 
         // Let empty files pass
         if (file.isNull()) {
@@ -46,18 +48,25 @@ module.exports = function(action) {
             errorMessage('Streams are not supported');
         }
 
+        // Emit error for unsupported file types
+        if (['.json'].indexOf(path.extname(file.path)) === -1) {
+            errorMessage('File ' + file.relative + ' is not supported. Expected .json file.');
+            return callback(null, file);
+        }
+
         // Load wintersmith environment
         var env = wintersmith(file.path);
 
         // Handle actions
         if (action === 'preview') {
-            doActionPreview(env);
+            runWintersmithPreview(env);
         } else if (action === 'build') {
-            doActionBuild(env);
+            runWintersmithBuild(env);
         } else {
             errorMessage('Action "' + action + '" not recognized. Use either "preview" or "build".');
         }
 
+        // Pass file through
         callback(null, file);
     });
 };

@@ -2,7 +2,7 @@
 
 > Gulp plugin for the [Wintersmith](https://github.com/jnordberg/wintersmith) static site generator
 
-Simple plugin for use with Wintersmith. Makes it possible to make a gulp task to either generate or preview the site.
+Simple plugin that lets you make a gulp task to either build or preview your site.
 
 ## Install
 
@@ -12,22 +12,23 @@ Install with npm from GitHub
 npm install --save-dev git+https://github.com/vanjacosic/gulp-wintersmith.git
 ```
 
+## Usage
 
-## Example
+Create a new task where you source the [Wintersmith config file](https://github.com/jnordberg/wintersmith#configuration) and pipe it into this plugin.
+
+**Examples:**
 
 ```js
 var gulp = require('gulp');
 var wintersmith = require('gulp-wintersmith');
 
 // Usage of preview action
-// Note the sourced file is the Wintersmith config.json file
 gulp.task('site-preview', function() {
     gulp.src('config.json')
         .pipe(wintersmith('preview'));
 });
 
 // Usage of build action
-// Note the sourced file is the Wintersmith config.json file
 gulp.task('site-build', function() {
     gulp.src('config.json')
         .pipe(wintersmith('build'));
@@ -40,8 +41,7 @@ gulp.task('site-build', function() {
 ### wintersmith(action)
 
 #### action
-Type: `String`
-Required: Yes
+Type: `String`, Required: Yes
 
 Sets which Wintersmith action to perform. Either 'preview' or 'build'.
 
