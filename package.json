@@ -1,6 +1,6 @@
 {
   "name": "gulp-wintersmith",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Gulp plugin for the Wintersmith static site generator",
   "license": "MIT",
   "homepage": "https://github.com/vanjacosic/gulp-wintersmith",
