@@ -4,13 +4,13 @@ var map = require('map-stream');
 var gutil = require('gulp-util');
 var wintersmith = require('wintersmith');
 
-// Helper function
+// Helper function for errors
 function errorMessage(message) {
     throw new gutil.PluginError('gulp-wintersmith', message);
 }
 
-// Build site to path
 function runWintersmithBuild(env) {
+    // Build site to path
     env.build(function(error) {
         if (error) {
             errorMessage(error);
@@ -20,8 +20,12 @@ function runWintersmithBuild(env) {
     });
 }
 
-// Run in preview mode
-function runWintersmithPreview(env) {
+function runWintersmithPreview(env, options) {
+    // Override env settings
+    env.config.hostname = options.hostname;
+    env.config.port = options.port;
+
+    // Run in preview mode
     env.preview(function(error) {
         if (error) {
             errorMessage(error);
@@ -30,13 +34,14 @@ function runWintersmithPreview(env) {
 }
 
 // Plugin function
-module.exports = function(actionArg) {
+module.exports = function(actionArg, serverOptions) {
 
     // Process files
     return map(function(file, callback) {
 
-        // Use provided option or use default
+        // Use provided options or use default
         var action = actionArg || 'preview';
+        var options = serverOptions || { hostname: 'localhost', port: 3000};
 
         // Let empty files pass
         if (file.isNull()) {
@@ -59,7 +64,7 @@ module.exports = function(actionArg) {
 
         // Handle actions
         if (action === 'preview') {
-            runWintersmithPreview(env);
+            runWintersmithPreview(env, options);
         } else if (action === 'build') {
             runWintersmithBuild(env);
         } else {

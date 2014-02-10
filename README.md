@@ -28,6 +28,12 @@ gulp.task('site-preview', function() {
         .pipe(wintersmith('preview'));
 });
 
+// Usage of preview action with custom settings
+gulp.task('site-preview', function() {
+    gulp.src('config.json')
+        .pipe(wintersmith('preview', { hostname: '127.0.0.1', port: '5000' }));
+});
+
 // Usage of build action
 gulp.task('site-build', function() {
     gulp.src('config.json')
@@ -38,12 +44,27 @@ gulp.task('site-build', function() {
 
 ## API
 
-### wintersmith(action)
+### wintersmith(action[, serverOptions])
 
 #### action
 Type: `String`, Required: Yes
 
-Sets which Wintersmith action to perform. Either 'preview' or 'build'.
+Sets which Wintersmith action to perform. Accepts `preview` or `build`.
+
+#### serverOptions
+Type: `Object`, Required: No
+
+Optional configuration of server that runs in `preview` mode.
+
+##### serverOptions.hostname
+Type: `String`, Required: No, Default: `localhost`
+
+Sets which hostname the preview server should use.
+
+##### serverOptions.port
+Type: `Number`, Required: No, Default: `3000`
+
+Sets which port the preview server should use.
 
 
 ## License
